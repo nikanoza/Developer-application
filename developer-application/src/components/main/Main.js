@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import classes from './Main.module.css';
 
 const Main = () => {
@@ -7,12 +8,14 @@ const Main = () => {
     <div className={classes.title}>
         Welcome Rocketeer !
     </div>
-    <button className={classes['btn-start']}>Start Questionnaire</button>
+    <button className={classes['btn-start']}>
+        <Link to='/survey-form'>Start Questionnaire</Link>
+    </button>
     <div className={classes['applications']}>
-       <a href='#'>Submitted Applications</a>
+       <Link to='/applicants'>Submitted Applications</Link>
     </div>
     <div className={classes['rocket-img']}>
-        <img src='/images/rocketman.png'/>
+        <img src='/images/rocketman.png' alt=''/>
     </div>
  </div>)
 }

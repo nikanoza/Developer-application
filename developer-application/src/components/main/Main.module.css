@@ -5,7 +5,7 @@
     background-image: url(../../../public/images/stars.png);
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -36,11 +36,16 @@
     font-size: 1.5em;
 }
 
-.applications a{
+.applications a, .btn-start a{
     color: #ffffff;
+}
+
+.btn-start a{
+    text-decoration: none;
 }
 
 .rocket-img img{
     width: 409.92px;
     height: 372.45px;
 }
+
