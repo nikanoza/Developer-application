@@ -1,6 +1,25 @@
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getRedberryText } from '../../store/RedberryTexts/RedberryTexts';
+import PersonalInformation from './formPages/PersonalInformation';
+
+
+import classes from './SurveyForm.module.css';
+
 const SurveyForm = () => {
-    return <div>
-        forms works!
+
+    //const developerInfo = useSelector(state=> state.formInfo);
+
+    const rightText = getRedberryText(0);
+
+    return <div className={classes.container}>
+        <div className={classes['left-side']}>
+            <PersonalInformation />
+        </div>
+        <div className={classes['right-side']}>
+            <div className={classes['right-title']}>{rightText.title}</div>
+            <div className={classes['right-text']}>{rightText.description}</div>
+        </div>
     </div>
 }
 

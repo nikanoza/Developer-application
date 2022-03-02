@@ -1,0 +1,40 @@
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.right-side{
+    width: 50%;
+    background: #151718;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.left-side{
+    width: 50%;
+    background: #ffffff;
+}
+
+.right-title{
+    margin-top: 112px;
+    font-size: 4em;
+    font-family: 'Rowdies', cursive;
+    color: #FE3B1F;
+    margin-left: 177px;
+}
+
+.right-text{
+    font-size: 1.5em;
+    line-height: 48px;
+    color: #ffffff;
+    width: 705px;
+    height: 606px;
+    vertical-align: center;
+    margin-left: 177px;
+    display: flex;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
