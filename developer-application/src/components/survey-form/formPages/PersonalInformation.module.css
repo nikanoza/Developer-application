@@ -35,14 +35,19 @@ input{
     font-family: 'Montserrat', sans-serif;
 }
 
-input:nth-child(2){
-    margin-top: 37px;
+
+
+.input-error{
+    border: 1px solid #FE3B1F;
 }
 
-input:nth-child(3){
-    margin-top: 35px;
-}
-
-input:nth-child(4){
-    margin-top: 51px;
+.error-message{
+    margin-top: 5px;
+    margin-bottom: 20px;
+    height: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    color: #FE3B1F;
+    font-size: 11px;
+    margin-left: 57px;
 }

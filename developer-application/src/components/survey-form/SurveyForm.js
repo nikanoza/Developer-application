@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { getRedberryText } from '../../store/RedberryTexts/RedberryTexts';
 import PersonalInformation from './formPages/PersonalInformation';
 

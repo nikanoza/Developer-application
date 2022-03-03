@@ -27,12 +27,11 @@ const developerInfoSlice = createSlice({
     initialState: initialDeveloperState,
     reducers: {
         updatePersonalInfo(state, action){
-            console.log(action.peyload);
-            //state.personalInfo[action.payload['property']] = action.payload.setvalue;
+            state.personalInfo[action.payload.property] = action.payload.value;
         }
     }
 });
 
 export const developerInfoActions = developerInfoSlice.actions;
 
-export default developerInfoSlice.reducer;
+export default developerInfoSlice;
