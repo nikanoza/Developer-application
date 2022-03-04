@@ -1,5 +1,6 @@
 import { getRedberryText } from '../../store/RedberryTexts/RedberryTexts';
 import PersonalInformation from './formPages/PersonalInformation';
+import { TechnicalSkills } from './formPages/TechnicalSkills';
 
 
 import classes from './SurveyForm.module.css';
@@ -12,7 +13,8 @@ const SurveyForm = () => {
 
     return <div className={classes.container}>
         <div className={classes['left-side']}>
-            <PersonalInformation />
+            {/* <PersonalInformation /> */}
+            <TechnicalSkills />
         </div>
         <div className={classes['right-side']}>
             <div className={classes['right-title']}>{rightText.title}</div>
