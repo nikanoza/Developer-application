@@ -7,6 +7,7 @@ import './App.css';
 import SurveyForm from './components/survey-form/SurveyForm';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import Submit from './components/submit/Submit';
 
 function App() {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function App() {
         <Route path="/main" element={ <Main/>} /> 
         <Route path="/applicants" element={ <Applicants/>} />
         <Route path="/survey-form" element={ <SurveyForm/>}/>
+        <Route path="/submit" element={<Submit/> } />
       </Routes>
     </div>
   );

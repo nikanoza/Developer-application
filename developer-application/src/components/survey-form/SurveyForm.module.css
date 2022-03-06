@@ -6,6 +6,7 @@
 
 .right-side{
     width: 50%;
+    min-height: 100vh;
     background: #151718;
     display: flex;
     flex-direction: column;

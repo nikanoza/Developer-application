@@ -1,4 +1,6 @@
 import { getRedberryText } from '../../store/RedberryTexts/RedberryTexts';
+import About from './formPages/About';
+import CovidInformation from './formPages/CovidInformation';
 import PersonalInformation from './formPages/PersonalInformation';
 import { TechnicalSkills } from './formPages/TechnicalSkills';
 
@@ -14,7 +16,9 @@ const SurveyForm = () => {
     return <div className={classes.container}>
         <div className={classes['left-side']}>
             {/* <PersonalInformation /> */}
-            <TechnicalSkills />
+            {/* <TechnicalSkills /> */}
+            {/* <CovidInformation/> */}
+            <About/>
         </div>
         <div className={classes['right-side']}>
             <div className={classes['right-title']}>{rightText.title}</div>

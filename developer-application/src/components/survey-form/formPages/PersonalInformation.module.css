@@ -24,7 +24,8 @@
     align-items: center;
 }
 
-input{
+.input{
+    margin:0;
     height: 54px;
     width: 455px;
     outline: none;
@@ -34,8 +35,6 @@ input{
     font-style: italic;
     font-family: 'Montserrat', sans-serif;
 }
-
-
 
 .input-error{
     border: 1px solid #FE3B1F;

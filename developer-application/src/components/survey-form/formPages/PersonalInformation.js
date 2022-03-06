@@ -80,28 +80,28 @@ const PersonalInformation = () => {
         </div>
         <div className={classes['form-group']}>
             <form>
-                <input type='text' placeholder='First Name' 
+                <input type='text' placeholder='First Name' className={classes.input}
                 style={{border: firstNameError.valid? '1px solid #525557' : '1px solid #FE3B1F'}} 
                 onChange={firstNameChangeHandler}
                 />
                 <div className={classes['error-message']}>
                     {firstNameError.text}
                 </div>
-                <input type='text' placeholder='Last Name' 
+                <input type='text' placeholder='Last Name'  className={classes.input}
                 style={{border: lastNameError.valid? '1px solid #525557' : '1px solid #FE3B1F'}} 
                 onChange={lastNameChangeHandler}
                 />
                 <div  className={classes['error-message']}>
                     {lastNameError.text}
                 </div>
-                <input type='email' placeholder='E Mail'
+                <input type='email' placeholder='E Mail'  className={classes.input}
                 style={{border: emailError.valid? '1px solid #525557' : '1px solid #FE3B1F'}} 
                 onChange={emailChangeHandler}
                 />
                 <div  className={classes['error-message']}>
                     {emailError.text}
                 </div>
-                <input type='number' placeholder='+9955' 
+                <input type='number' placeholder='+9955'  className={classes.input}
                 style={{border: mobileError.valid? '1px solid #525557' : '1px solid #FE3B1F'}} 
                 onChange={mobileChangeHandler}
                 />

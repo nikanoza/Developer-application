@@ -35,6 +35,12 @@ const developerInfoSlice = createSlice({
         removeSkill(state,action){
             const skillIndex = state.skils.findIndex( skill => skill.title === action.payload);
             state.skils.splice(skillIndex, 1);
+        },
+        updateCovidInfo(state,action){
+            state.covidInfo[action.payload.property] = action.payload.value;
+        },
+        updateMoreInfo(state,action){
+            state.more[action.payload.property] = action.payload.value;
         }
     }
 });
