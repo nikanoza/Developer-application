@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { developerInfoActions } from '../../../store/redux/developerInfo-slice';
+import Pagination from '../Pagination';
 import classes from './About.module.css';
 const About = () => {
     const [devtalksStatus, setDevtalksStatus] = useState('');
@@ -56,6 +57,7 @@ const About = () => {
             </div>
             <textarea className={classes['about-me']} placeholder="I..." onChange={specialTextChangeHandler}></textarea>
         </div>
+        <Pagination className={classes.pagination}/>
     </div>
 }
 

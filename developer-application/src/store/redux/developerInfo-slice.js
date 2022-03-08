@@ -5,7 +5,7 @@ const initialDeveloperState = {
         firstName: '',
         lastName: '',
         email: '',
-        mobile: 5,
+        mobile: '',
     },
     skils: [],
     covidInfo: {

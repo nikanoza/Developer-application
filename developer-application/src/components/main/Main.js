@@ -9,7 +9,7 @@ const Main = () => {
         Welcome Rocketeer !
     </div>
     <button className={classes['btn-start']}>
-        <Link to='/survey-form'>Start Questionnaire</Link>
+        <Link to='/survey-form/1'>Start Questionnaire</Link>
     </button>
     <div className={classes['applications']}>
        <Link to='/applicants'>Submitted Applications</Link>

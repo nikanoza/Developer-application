@@ -1,0 +1,21 @@
+.pagination{
+    width: 231px;
+    height: 19px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon{
+    border-radius: 50%;
+    border: 3px solid #FE3B1F;
+    color: #ffffff;
+    background: #FE3B1F;
+}
+
+.btn-circle{
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+}

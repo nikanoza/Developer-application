@@ -22,7 +22,7 @@
 .radio-group{
     width: 645px;
     height: 119px;
-    margin-top: 127px;
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -110,4 +110,8 @@
 
 .about-Devtalk, .about-me{
     border: 1px solid #525557;
+}
+
+.pagination{
+    margin-top: 35px;
 }

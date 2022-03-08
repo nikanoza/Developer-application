@@ -55,6 +55,8 @@ input{
 .skills{
     margin-top: 56px;
     width: 455px;
+    height: 250px;
+    overflow-y: auto;
 }
 
 .skill{
@@ -82,4 +84,8 @@ input{
     width: 20px;
     height: 20px;
     cursor: pointer;
+}
+
+.pagination{
+    margin-top: 20px;
 }

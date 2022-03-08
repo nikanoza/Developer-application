@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import { getRedberryText } from '../../store/RedberryTexts/RedberryTexts';
 import About from './formPages/About';
 import CovidInformation from './formPages/CovidInformation';
@@ -8,17 +9,18 @@ import { TechnicalSkills } from './formPages/TechnicalSkills';
 import classes from './SurveyForm.module.css';
 
 const SurveyForm = () => {
+    const params = useParams();
+    const page = +params.page;
+    console.log(params)
 
-    //const developerInfo = useSelector(state=> state.formInfo);
-
-    const rightText = getRedberryText(0);
+    const rightText = getRedberryText(page-1);
 
     return <div className={classes.container}>
         <div className={classes['left-side']}>
-            {/* <PersonalInformation /> */}
-            {/* <TechnicalSkills /> */}
-            {/* <CovidInformation/> */}
-            <About/>
+            {page === 1 && <PersonalInformation />}
+            {page === 2 && <TechnicalSkills />}
+            {page === 3 &&<CovidInformation/>}
+            {page === 4 && <About/>}
         </div>
         <div className={classes['right-side']}>
             <div className={classes['right-title']}>{rightText.title}</div>

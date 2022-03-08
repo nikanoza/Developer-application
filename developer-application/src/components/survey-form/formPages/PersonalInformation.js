@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { developerInfoActions } from '../../../store/redux/developerInfo-slice';
+import { navigationStatusfoActions } from '../../../store/redux/navigationStatus-slice';
+import Pagination from '../Pagination';
 
 import classes  from './PersonalInformation.module.css';
 
@@ -11,6 +13,8 @@ const PersonalInformation = () => {
     const [mobileError, setMobileError] = useState({valid: true, text: ''}); //mobile validate state
 
     const dispatch = useDispatch();
+    const navigationStatus = useSelector(state => state.navigationStatus.personalInfoPage);
+    const personalInfo = useSelector(state => state.formInfo.personalInfo);
 
     //validate functions
     const nameVaildation = (string) => {
@@ -21,8 +25,8 @@ const PersonalInformation = () => {
             setFirstNameError({valid:false, text: '*first name should include 3 or more characters'});
         }else{
             setFirstNameError({valid:true, text: ''});
-            dispatch(developerInfoActions.updatePersonalInfo({property: 'firstName', value: string}));
         };
+        dispatch(developerInfoActions.updatePersonalInfo({property: 'firstName', value: string}));
     };
 
     const surnameValidation = (string) => {
@@ -33,8 +37,8 @@ const PersonalInformation = () => {
             setLastNameError({valid:false, text: '*last name should include 3 or more characters'});
         }else{
             setLastNameError({valid:true, text: ''});
-            dispatch(developerInfoActions.updatePersonalInfo({property: 'lastName', value: string}));
         };
+        dispatch(developerInfoActions.updatePersonalInfo({property: 'lastName', value: string}));
     };
 
     const emailValidation = (string) => {
@@ -44,35 +48,54 @@ const PersonalInformation = () => {
             setEmailError({valid:false, text: '*email should include "@" and "." characters'});
         }else{
             setEmailError({valid: true, text: ''});
-            dispatch(developerInfoActions.updatePersonalInfo({property: 'email', value: string}));
         };
+        dispatch(developerInfoActions.updatePersonalInfo({property: 'email', value: string}));
     };
 
     const mobileValidation = (number) => {
-        if(!(/^9955\d{8}$/).test(number)){
-            setMobileError({valid:false, text: '*mobile should be georgian format, start with 9955'});
+        if(!(/^[+]9955\d{8}$/).test(number) && number !== ''){
+            setMobileError({valid: false, text: '*mobile should be georgian format, start with +9955'});
         }else{
             setMobileError({valid: true, text: ''});
-            dispatch(developerInfoActions.updatePersonalInfo({property: 'mobile', value: number}));
         }
+        dispatch(developerInfoActions.updatePersonalInfo({property: 'mobile', value: number}));
     }
 
     // change handler functions for inputs
     const firstNameChangeHandler = (event) => {
         nameVaildation(event.target.value);
+        canGoNextPage();
     };
+
     const lastNameChangeHandler = (event) =>{
         surnameValidation(event.target.value);
+        canGoNextPage();
     };
+
     const emailChangeHandler = (event) => {
         emailValidation(event.target.value);
+        canGoNextPage();
     };
+
     const mobileChangeHandler = (event) =>{
         mobileValidation(event.target.value);
-        if(event.target.value === ''){
-            setMobileError({valid: true, text: ''});
-        }
+        canGoNextPage();
     };
+    const canGoNextPage = () => {
+        const name = firstNameError.valid && personalInfo.firstName !== '';
+        const surname = lastNameError.valid && personalInfo.lastName !== '';
+        const email = emailError.valid && personalInfo.email !== '';
+        const mobile = mobileError.valid;
+        if(name && surname && email && mobile){
+            dispatch(navigationStatusfoActions.updateStatus({property: 'personalInfoPage', status: true}));
+        }else{
+            if(navigationStatus){
+                dispatch(navigationStatusfoActions.updateStatus({property: 'personalInfoPage', status: false}));
+            }
+        }
+    }
+
+    canGoNextPage();    
 
     return <div className={classes.page}>
         <div className={classes.title}>
@@ -101,7 +124,7 @@ const PersonalInformation = () => {
                 <div  className={classes['error-message']}>
                     {emailError.text}
                 </div>
-                <input type='number' placeholder='+9955'  className={classes.input}
+                <input type='text' placeholder='+9955'  className={classes.input}
                 style={{border: mobileError.valid? '1px solid #525557' : '1px solid #FE3B1F'}} 
                 onChange={mobileChangeHandler}
                 />
@@ -110,6 +133,7 @@ const PersonalInformation = () => {
                 </div>
             </form>
         </div>
+        <Pagination className={classes.pagination}/>
     </div>
 }
 

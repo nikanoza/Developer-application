@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { developerInfoActions } from '../../../store/redux/developerInfo-slice';
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 
 import classes from './TechnicalSkills.module.css';
+import Pagination from '../Pagination';
 export const TechnicalSkills = () => {
     const dispatch = useDispatch();
     const [program, setProgram] = useState('skills');
@@ -34,8 +36,8 @@ export const TechnicalSkills = () => {
     const removeSkillhandler = (title) => {
         dispatch(developerInfoActions.removeSkill(title));
     }
-
-    return <div className={classes.page}>
+    return <Fragment>
+    <div className={classes.page}>
         <div className={classes.title}>
             Tell us about your skills
         </div>
@@ -56,5 +58,7 @@ export const TechnicalSkills = () => {
                </button>
             </div> )}
         </div>
+        <Pagination className={classes.pagination}/>
     </div>
+    </Fragment>
 }

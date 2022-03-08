@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch} from 'react-redux';
 import { developerInfoActions } from '../../../store/redux/developerInfo-slice';
+import Pagination from '../Pagination';
 
 import classes from './CovidInformation.module.css';
 const CovidInformation = () => {
@@ -113,6 +114,7 @@ const CovidInformation = () => {
                 </div>
                 <input type="date" /> 
         </div>}
+        <Pagination className={classes.pagination}/>
     </div>
 }
 
