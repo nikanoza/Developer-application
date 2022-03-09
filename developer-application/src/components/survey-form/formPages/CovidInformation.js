@@ -70,21 +70,21 @@ const CovidInformation = () => {
                 how would you prefer to work?
             </div>
             <div className={classes['radio-btn']}>
-                <input type="radio" name='work' value="From Sairme Office" 
-                checked={userCovidInfo.workAt === "From Sairme Office"} 
+                <input type="radio" name='work' value="from_office" 
+                checked={userCovidInfo.workAt === "from_office"} 
                 onChange={workStatusChangeHandler}
                 />
                 <label>From Sairme Office</label>
             </div>
             <div className={classes['radio-btn']}>
-                <input type="radio" name='work' value="From Home" 
-                checked={userCovidInfo.workAt === "From Home"} onChange={workStatusChangeHandler}
+                <input type="radio" name='work' value="from_home" 
+                checked={userCovidInfo.workAt === "from_home"} onChange={workStatusChangeHandler}
                 />
                 <label>From Home</label>
             </div>
             <div className={classes['radio-btn']}>
-                <input type="radio" name='work' value="Hybrid" 
-                checked={userCovidInfo.workAt === "Hybrid"} onChange={workStatusChangeHandler}
+                <input type="radio" name='work' value="hybrid" 
+                checked={userCovidInfo.workAt === "hybrid"} onChange={workStatusChangeHandler}
                 />
                 <label>Hybrid</label>
             </div>

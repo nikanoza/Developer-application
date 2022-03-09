@@ -29,9 +29,10 @@ export const TechnicalSkills = () => {
     }
 
     const addSkillsHandler = () => {
-        const titles = userSkils.slice().map( skill => skill.title );
-        if(!titles.includes(program) && program !== 'skills' && year !== ''){
-            dispatch(developerInfoActions.addSkill({title: program, year: year}));
+        const ides = userSkils.slice().map( skill => skill.id );
+        const id = skills.findIndex( skill => skill.title === program);
+        if(!ides.includes(id) && program !== 'skills' && year !== ''){
+            dispatch(developerInfoActions.addSkill({id: id, year: year}));
             setProgram('skills');
             setYear('');
             setShowError(false);
@@ -67,7 +68,7 @@ export const TechnicalSkills = () => {
         </div>}
         <div className={classes.skills}>
             {userSkils.map( (skill, index) => <div key={index} className={classes.skill}>
-               <div>{skill.title}</div>
+               <div>{skills[skill.id].title}</div>
                <div>Years of Experience: {skill.experience}</div>
                <button type='button' className={classes['btn-remove']} onClick={()=> { removeSkillhandler(skill.title)}}>
                 <FontAwesomeIcon icon={faMinus} className={classes['icon-remove']}/>

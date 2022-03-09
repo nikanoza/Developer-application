@@ -9,12 +9,14 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Submit from './components/submit/Submit';
 import Thanks from './components/submit/Thanks';
+import { fetchApplications } from './store/redux/developerInfo-actions';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(()=>{
     dispatch(fetchSkillsData());
+    dispatch(fetchApplications())
   }, [dispatch]);
 
   return (

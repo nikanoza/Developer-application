@@ -1,0 +1,239 @@
+.page{
+    width: 100%;
+    min-height: 100vh;
+    background: #151718;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}    
+
+.title{
+    font-size: 56px;
+    color: #ffffff;
+    margin-top: 94px;
+    height: 100px;
+    font-weight: 700;
+    font-family: 'Rowdies', cursive;
+}
+
+.application-box{
+    width: 1154px;
+    height: 52px;
+    background: #FE3B1F;
+    margin-top: 11px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+    padding-left: 30px;
+    padding-right: 20px;
+}
+
+.btn-arrow{
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.info{
+    width: 1154px;
+    padding-top: 36px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-top{
+    height: 300px;
+    display: flex;  
+}
+
+.personalInfo{
+    width: 473px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.groupTitle{
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    color: #FE3B1F;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.personal-info-group{
+    display: flex;
+    width: 100%;
+    font-style: italic;
+    height: 42px;
+}
+
+.personal-info-group-left{
+    width: 30%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 12px;
+}
+
+.personal-info-group-right{
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 12px;
+}
+
+.skillset{
+    width: 450px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.skill{
+    width: 100%;
+    height: 48px;
+    display: flex;
+}
+
+.skill-left{
+    width: 30%;
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    font-size: 14px;
+}
+.skill-right{
+    width: 70%;
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.info-bottom{
+    display: flex;
+}
+.covidSituation{
+    width: 473px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.radio-group{
+    width: 645px;
+    height: 157px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.question{
+    height: 52px;
+    width: 450px;
+    display: flex;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+}
+
+.radio-btn{
+    height: 21px;
+    margin-left: 10px;
+    margin-top: 8px;
+    padding: 0;
+    width: 216px;
+}
+
+.radio-btn input{
+    margin-top: 0;
+    width: 12px;
+    height: 12px;
+}
+
+.radio-btn label{
+    margin-left: 7px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.date-question{
+    width: 645px;
+    height: 119px;
+}
+
+.date-question input{
+    margin-top: 13px;
+    width: 350px;
+    height: 54px;
+}
+.date-question input::-webkit-calendar-picker-indicator {
+    width: 16px;
+    height: 18px;
+    margin-right: 10px;
+    background-image: url('../../../public/images/calendar.png');
+    cursor: pointer;
+}
+
+.insigts{
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.area-group{
+    width: 645px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.area-group:nth-child(1){
+    margin-top: 45px;
+}
+
+.area-title{
+    width: 100%;
+    height: 52px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.about-Devtalk{
+    Width: 535px;
+    Height: 122px;
+    margin-top: 11px;
+    outline: none;
+    padding: 24px;
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+    resize: none;
+}
+
+.about-me{
+    Width: 535px;
+    Height: 89px;
+    outline: none;
+    padding: 24px;
+    font-size: 13px;
+    font-family: 'Montserrat', sans-serif;
+    resize: none;
+}
+
+.about-Devtalk, .about-me{
+    border: 1px solid #525557;
+}

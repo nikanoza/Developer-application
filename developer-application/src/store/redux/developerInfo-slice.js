@@ -30,7 +30,7 @@ const developerInfoSlice = createSlice({
             state.personalInfo[action.payload.property] = action.payload.value;
         },
         addSkill(state,action){
-            state.skils.push({title: action.payload.title, experience: action.payload.year});
+            state.skils.push({id: +action.payload.id, experience: +action.payload.year});
         },
         removeSkill(state,action){
             const skillIndex = state.skils.findIndex( skill => skill.title === action.payload);
