@@ -15,7 +15,7 @@ const Main = () => {
        <Link to='/applicants'>Submitted Applications</Link>
     </div>
     <div className={classes['rocket-img']}>
-        <img src='/images/rocketman.png' alt=''/>
+        
     </div>
  </div>)
 }

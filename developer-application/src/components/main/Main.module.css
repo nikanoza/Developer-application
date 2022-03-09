@@ -46,8 +46,10 @@
     text-decoration: none;
 }
 
-.rocket-img img{
+.rocket-img {
     width: 409.92px;
     height: 372.45px;
+    background: url('../../../public/images/rocketman.png');
+    background-size: cover;
 }
 
