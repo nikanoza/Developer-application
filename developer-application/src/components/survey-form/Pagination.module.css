@@ -19,3 +19,7 @@
     outline: none;
     border: none;
 }
+
+.icon, .btn-circle{
+    cursor: pointer;
+}

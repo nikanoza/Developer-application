@@ -10,13 +10,13 @@ const initialDeveloperState = {
     skils: [],
     covidInfo: {
         workAt: '',
-        status: false,
+        status: '',
         covidLastDate: '',
-        vaccine: false,
+        vaccine: '',
         lastVaccineDate: ''
     },
     more: {
-        attendStatus: false,
+        attendStatus: '',
         aboutDevtalk: '',
         special: ''
     }

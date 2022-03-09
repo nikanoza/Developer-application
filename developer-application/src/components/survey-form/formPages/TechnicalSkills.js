@@ -1,17 +1,19 @@
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { developerInfoActions } from '../../../store/redux/developerInfo-slice';
-
+import { navigationStatusActions } from '../../../store/redux/navigationStatus-slice';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 
 import classes from './TechnicalSkills.module.css';
 import Pagination from '../Pagination';
+
 export const TechnicalSkills = () => {
     const dispatch = useDispatch();
     const [program, setProgram] = useState('skills');
     const [year, setYear] = useState('');
+    const [showError,setShowError] = useState(false);
 
     const skills = useSelector(state => state.skills.skills);
     const userSkils = useSelector(state => state.formInfo.skils);
@@ -21,23 +23,34 @@ export const TechnicalSkills = () => {
     };
 
     const yearChangeHandler = (event) => {
-        setYear(event.target.value);
+        if(+event.target.value > 0 || event.target.value === ''){
+            setYear(event.target.value);
+        }
     }
 
     const addSkillsHandler = () => {
         const titles = userSkils.slice().map( skill => skill.title );
-        if(!titles.includes(program) && program !== 'skills'){
+        if(!titles.includes(program) && program !== 'skills' && year !== ''){
             dispatch(developerInfoActions.addSkill({title: program, year: year}));
             setProgram('skills');
             setYear('');
+            setShowError(false);
         }
     }
 
     const removeSkillhandler = (title) => {
+        if(userSkils.length === 1) setShowError(true);
         dispatch(developerInfoActions.removeSkill(title));
     }
-    return <Fragment>
-    <div className={classes.page}>
+
+
+    if(userSkils.length > 0){
+        dispatch(navigationStatusActions.updateStatus({property: 'technicalSkillPage', status: true}));
+    }else{
+        dispatch(navigationStatusActions.updateStatus({property: 'technicalSkillPage', status: false}));
+    }    
+
+    return <div className={classes.page}>
         <div className={classes.title}>
             Tell us about your skills
         </div>
@@ -49,6 +62,9 @@ export const TechnicalSkills = () => {
             <input type='number' placeholder='Experience Duration in Years' value={year} onChange={yearChangeHandler}/>
             <button type='button' className={classes['btn-add']} onClick={addSkillsHandler}>Add Programming Language</button>
         </div>
+        {showError && <div className={classes['error-message']}>
+            *skills should include 1 or more skill       
+        </div>}
         <div className={classes.skills}>
             {userSkils.map( (skill, index) => <div key={index} className={classes.skill}>
                <div>{skill.title}</div>
@@ -60,5 +76,4 @@ export const TechnicalSkills = () => {
         </div>
         <Pagination className={classes.pagination}/>
     </div>
-    </Fragment>
 }

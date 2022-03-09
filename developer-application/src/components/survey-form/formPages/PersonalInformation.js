@@ -1,20 +1,21 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { developerInfoActions } from '../../../store/redux/developerInfo-slice';
-import { navigationStatusfoActions } from '../../../store/redux/navigationStatus-slice';
+import { navigationStatusActions } from '../../../store/redux/navigationStatus-slice';
 import Pagination from '../Pagination';
 
 import classes  from './PersonalInformation.module.css';
 
 const PersonalInformation = () => {
+
     const [firstNameError, setFirstNameError] = useState({valid: true, text: ''}); // first name validate state
     const [lastNameError, setLastNameError] = useState({valid: true, text: ''}); // last name validate state
     const [emailError, setEmailError] = useState({valid: true, text: ''}); //email validate state
     const [mobileError, setMobileError] = useState({valid: true, text: ''}); //mobile validate state
 
     const dispatch = useDispatch();
-    const navigationStatus = useSelector(state => state.navigationStatus.personalInfoPage);
     const personalInfo = useSelector(state => state.formInfo.personalInfo);
+    const navigationStatus = useSelector(state => state.navigationStatus.personalInfoPage);
 
     //validate functions
     const nameVaildation = (string) => {
@@ -64,22 +65,18 @@ const PersonalInformation = () => {
     // change handler functions for inputs
     const firstNameChangeHandler = (event) => {
         nameVaildation(event.target.value);
-        canGoNextPage();
     };
 
     const lastNameChangeHandler = (event) =>{
         surnameValidation(event.target.value);
-        canGoNextPage();
     };
 
     const emailChangeHandler = (event) => {
         emailValidation(event.target.value);
-        canGoNextPage();
     };
 
     const mobileChangeHandler = (event) =>{
         mobileValidation(event.target.value);
-        canGoNextPage();
     };
     const canGoNextPage = () => {
         const name = firstNameError.valid && personalInfo.firstName !== '';
@@ -87,15 +84,15 @@ const PersonalInformation = () => {
         const email = emailError.valid && personalInfo.email !== '';
         const mobile = mobileError.valid;
         if(name && surname && email && mobile){
-            dispatch(navigationStatusfoActions.updateStatus({property: 'personalInfoPage', status: true}));
+            dispatch(navigationStatusActions.updateStatus({property: 'personalInfoPage', status: true}));
         }else{
             if(navigationStatus){
-                dispatch(navigationStatusfoActions.updateStatus({property: 'personalInfoPage', status: false}));
+                dispatch(navigationStatusActions.updateStatus({property: 'personalInfoPage', status: false}));
             }
         }
     }
-
-    canGoNextPage();    
+    
+    canGoNextPage();
 
     return <div className={classes.page}>
         <div className={classes.title}>
@@ -105,35 +102,35 @@ const PersonalInformation = () => {
             <form>
                 <input type='text' placeholder='First Name' className={classes.input}
                 style={{border: firstNameError.valid? '1px solid #525557' : '1px solid #FE3B1F'}} 
-                onChange={firstNameChangeHandler}
+                onChange={firstNameChangeHandler} value={personalInfo.firstName}
                 />
                 <div className={classes['error-message']}>
                     {firstNameError.text}
                 </div>
                 <input type='text' placeholder='Last Name'  className={classes.input}
                 style={{border: lastNameError.valid? '1px solid #525557' : '1px solid #FE3B1F'}} 
-                onChange={lastNameChangeHandler}
+                onChange={lastNameChangeHandler} value={personalInfo.lastName}
                 />
                 <div  className={classes['error-message']}>
                     {lastNameError.text}
                 </div>
                 <input type='email' placeholder='E Mail'  className={classes.input}
                 style={{border: emailError.valid? '1px solid #525557' : '1px solid #FE3B1F'}} 
-                onChange={emailChangeHandler}
+                onChange={emailChangeHandler} value={personalInfo.email}
                 />
                 <div  className={classes['error-message']}>
                     {emailError.text}
                 </div>
                 <input type='text' placeholder='+9955'  className={classes.input}
                 style={{border: mobileError.valid? '1px solid #525557' : '1px solid #FE3B1F'}} 
-                onChange={mobileChangeHandler}
+                onChange={mobileChangeHandler} value={personalInfo.mobile}
                 />
                 <div className={classes['error-message']}>
                     {mobileError.text}
                 </div>
             </form>
         </div>
-        <Pagination className={classes.pagination}/>
+        <Pagination className={classes.pagination} />
     </div>
 }
 

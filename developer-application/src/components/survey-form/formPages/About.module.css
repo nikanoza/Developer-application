@@ -113,5 +113,17 @@
 }
 
 .pagination{
-    margin-top: 35px;
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+.error-message{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 16px;
+    width: 645px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    color: #FE3B1F;
+    font-size: 11px;
 }

@@ -17,6 +17,6 @@ const navigationStatusSlice = createSlice({
     }
 });
 
-export const navigationStatusfoActions = navigationStatusSlice.actions;
+export const navigationStatusActions = navigationStatusSlice.actions;
 
 export default navigationStatusSlice;

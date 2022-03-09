@@ -11,7 +11,6 @@ import classes from './SurveyForm.module.css';
 const SurveyForm = () => {
     const params = useParams();
     const page = +params.page;
-    console.log(params)
 
     const rightText = getRedberryText(page-1);
 

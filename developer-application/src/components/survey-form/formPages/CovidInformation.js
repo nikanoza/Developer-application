@@ -1,45 +1,66 @@
 
-import { useEffect, useState } from 'react';
-import { useDispatch} from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector} from 'react-redux';
 import { developerInfoActions } from '../../../store/redux/developerInfo-slice';
+import { navigationStatusActions } from '../../../store/redux/navigationStatus-slice';
 import Pagination from '../Pagination';
 
 import classes from './CovidInformation.module.css';
 const CovidInformation = () => {
+    const [showWorkError, setShowWorkError] = useState(false);
+    const [showCovidStatusError, setCovidStatusError] = useState(false);
+    const [showVaccineStatusError, setShowVaccineStatusError] = useState(false);
+
     const dispatch = useDispatch();
-    const [workStatus, setWorkStatus] = useState('');
-    const [covidStatus, setCovidStatus] = useState('');
-    const [vaccineStatus, setVaccineStatus] = useState('');
-    const [covidDate, setCovidDate] = useState('Date');
-
-    useEffect(() => {
-        dispatch(developerInfoActions.updateCovidInfo({property: 'workAt', value: workStatus}));
-    }, [workStatus,dispatch]);
-
-    useEffect(() => {
-        dispatch(developerInfoActions.updateCovidInfo({property: 'status', value: covidStatus === 'true'}));
-    }, [covidStatus, dispatch]);
-
-    useEffect(() => {
-        dispatch(developerInfoActions.updateCovidInfo({property: 'vaccine', value: vaccineStatus === 'true'}));
-    }, [vaccineStatus,dispatch]);
+    const userCovidInfo =  useSelector( state => state.formInfo.covidInfo);
+    const navigationStatus = useSelector( state => state.navigationStatus.covidInformationPage);
 
     const workStatusChangeHandler = (event) => {
-        setWorkStatus(event.target.value);
+        dispatch(developerInfoActions.updateCovidInfo({property: 'workAt', value: event.target.value}));
+        setShowWorkError(true);
     }
     const covidStatusChangeHandler = (event) => {
-        setCovidStatus(event.target.value);
+        dispatch(developerInfoActions.updateCovidInfo({property: 'status', value: event.target.value === 'true'}));
+        if(event.target.value === 'false'){
+            dispatch(developerInfoActions.updateCovidInfo({property: 'covidLastDate', value: ''}))
+        }
+        setCovidStatusError(true);
     }
 
     const vaccineStatusChangeHandler = (event) => {
-        setVaccineStatus(event.target.value);
+        dispatch(developerInfoActions.updateCovidInfo({property: 'vaccine', value: event.target.value === 'true'}));
+        if(event.target.value === 'false'){
+            dispatch(developerInfoActions.updateCovidInfo({property: 'lastVaccineDate', value:''}));
+        }
+        setShowVaccineStatusError(true);
     }
 
     const covidDateChangeHandler = (event) => {
-        setCovidDate(event.target.value);
-        console.log(covidDate);
+       dispatch(developerInfoActions.updateCovidInfo({property: 'covidLastDate', value: event.target.value}))
     }
 
+    const vaccineDateCgangeHandler = (event) => {
+        dispatch(developerInfoActions.updateCovidInfo({property: 'lastVaccineDate', value: event.target.value}));
+    }
+
+    const canGoNextPage = () => {
+        const work = userCovidInfo.workAt !== '';
+        const covidStatus = userCovidInfo.status !== '';
+        const covidDate = (userCovidInfo.status !== '' && userCovidInfo.covidLastDate !== '') || (userCovidInfo.status === false && userCovidInfo.covidLastDate === '');
+        const vaccineStatus = userCovidInfo.vaccine !== '';
+        const vaccineDate = (userCovidInfo.vaccine !== '' && userCovidInfo.lastVaccineDate !== '') || (userCovidInfo.vaccine === false && userCovidInfo.lastVaccineDate === '');
+        const isValid = work && covidStatus && covidDate && vaccineStatus && vaccineDate;
+        console.log(work , covidStatus , covidDate , vaccineStatus , vaccineDate);
+        if(isValid){
+            dispatch(navigationStatusActions.updateStatus({property: 'covidInformationPage', status: true}));
+        }else{
+            if(navigationStatus){
+                dispatch(navigationStatusActions.updateStatus({property: 'covidInformationPage', status: false}));
+            }
+        }
+    }
+
+    canGoNextPage();
     return <div className={classes.page}>
         <div className={classes.title}>
             Covid Stuff
@@ -50,46 +71,56 @@ const CovidInformation = () => {
             </div>
             <div className={classes['radio-btn']}>
                 <input type="radio" name='work' value="From Sairme Office" 
-                checked={workStatus === "From Sairme Office"} 
+                checked={userCovidInfo.workAt === "From Sairme Office"} 
                 onChange={workStatusChangeHandler}
                 />
                 <label>From Sairme Office</label>
             </div>
             <div className={classes['radio-btn']}>
                 <input type="radio" name='work' value="From Home" 
-                checked={workStatus === "From Home"} onChange={workStatusChangeHandler}
+                checked={userCovidInfo.workAt === "From Home"} onChange={workStatusChangeHandler}
                 />
                 <label>From Home</label>
             </div>
             <div className={classes['radio-btn']}>
                 <input type="radio" name='work' value="Hybrid" 
-                checked={workStatus === "Hybrid"} onChange={workStatusChangeHandler}
+                checked={userCovidInfo.workAt === "Hybrid"} onChange={workStatusChangeHandler}
                 />
                 <label>Hybrid</label>
             </div>
         </div>
+        {userCovidInfo.workAt === '' && showWorkError && <div className={classes['error-message']}>
+            *Should Choose one of the options
+        </div>}
         <div className={`${classes['radio-group']} ${classes.set2}`}>
             <div className={classes.question}>
             Did you contact covid 19? :(
             </div>
             <div className={classes['radio-btn']}>
                 <input type="radio" name='contactStatus' value="true"
-                checked={covidStatus === 'true'} onChange={covidStatusChangeHandler}
+                checked={userCovidInfo.status} onChange={covidStatusChangeHandler}
                 />
                 <label>Yes</label>
             </div>
             <div className={classes['radio-btn']}>
                 <input type="radio"  name='contactStatus' value="false"
-                checked={covidStatus === 'false'} onChange={covidStatusChangeHandler}
+                checked={!userCovidInfo.status && userCovidInfo.status !== ''} onChange={covidStatusChangeHandler}
                 />
                 <label>No</label>
             </div>
         </div>
-        {covidStatus === 'true'&& <div className={classes['date-question']}>
+        {userCovidInfo.status === '' && showCovidStatusError && <div className={classes['error-message']}>
+            *Should Choose one of the options
+        </div>}
+        {userCovidInfo.status && <div className={classes['date-question']}>
                 <div className={classes.question}>
                     When?
                 </div>
-                <input type="date" value="Date" onChange={covidDateChangeHandler}/> 
+                <input type="date" value={userCovidInfo.covidLastDate} 
+                onChange={covidDateChangeHandler}/> 
+        </div>}
+        {userCovidInfo.status && userCovidInfo.covidLastDate === '' && <div className={classes['error-message']}>
+            *date can not be empty
         </div>}
         <div className={`${classes['radio-group']} ${classes.set3}`}>
             <div className={classes.question}>
@@ -97,22 +128,30 @@ const CovidInformation = () => {
             </div>
             <div className={classes['radio-btn']}>
                 <input type="radio" name='vaccineStatus' value="true"
-                checked={vaccineStatus === 'true'} onChange={vaccineStatusChangeHandler}
+                checked={userCovidInfo.vaccine} onChange={vaccineStatusChangeHandler}
                 />
                 <label>Yes</label>
             </div>
             <div className={classes['radio-btn']}>
                 <input type="radio" name='vaccineStatus' value="false"
-                checked={vaccineStatus === 'false'} onChange={vaccineStatusChangeHandler}
+                checked={!userCovidInfo.vaccine && userCovidInfo.vaccine !== ''} onChange={vaccineStatusChangeHandler}
                 />
                 <label>No</label>
             </div>
         </div>
-        {vaccineStatus === 'true' && <div className={classes['date-question']} style={{marginBottom: '20px'}}>
+        {userCovidInfo.vaccine === '' && showVaccineStatusError && <div className={classes['error-message']}>
+            *Should Choose one of the options
+        </div>}        
+        {userCovidInfo.vaccine && <div className={classes['date-question']} style={{marginBottom: '20px'}}>
                 <div className={classes.question}>
                     When did you get your last covid vaccine?
                 </div>
-                <input type="date" /> 
+                <input type="date" value={userCovidInfo.lastVaccineDate}
+                onChange={vaccineDateCgangeHandler}
+                /> 
+        </div>}
+        {userCovidInfo.vaccine && userCovidInfo.lastVaccineDate === '' && <div className={classes['error-message']}>
+            *date can not be empty
         </div>}
         <Pagination className={classes.pagination}/>
     </div>
