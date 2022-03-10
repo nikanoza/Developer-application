@@ -36,7 +36,7 @@ const Pagination = (props) => {
         }else if(page === 4 && navigationStatus.aboutPage){
             navigate('/submit');
         }else{
-            page === 1 ? alert('should entered firstName, laastname and email fields corectly') :
+            page === 1 ? alert('should entered firstname, lastname and email fields corectly') :
             page === 2 ? alert('should add 1 or more skill') :
             page === 3 ? alert('should answer all the questions first') :
             alert('should answer the question and fill the textareas field(s)');
